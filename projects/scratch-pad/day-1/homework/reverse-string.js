@@ -21,6 +21,7 @@
 
 function reverseString(input) {
     // YOUR CODE GOES BELOW HERE //
+    var output = "";
     
     
     

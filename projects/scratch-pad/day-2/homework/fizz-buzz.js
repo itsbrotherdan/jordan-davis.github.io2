@@ -12,9 +12,17 @@
 */
 function fizzBuzz() {
     // YOUR CODE GOES BELOW HERE //
-
-
-
+    for (var i = 1; i <= 100; i++){ //counting from 1 to 100
+        if (i % 15 == 0)//check if num is multple of 3 and 5
+            console.log("FizzBuzz"); //if true print FizzBuzz
+        else if (i % 3 == 0) //check if num is a multiple of 3
+            console.log("Fizz"); //if true print Fizz
+        else if (i % 5 == 0)//check if num is multiple of 5
+            console.log("Buzz"); //if true print Buzz
+        else{
+            console.log(i);  
+        }
+    }
     // YOUR CODE GOES ABOVE HERE //
 }
 

@@ -14,8 +14,8 @@
  */
 function length(string) {
     // YOUR CODE BELOW HERE //
-    
-
+    return string.length;
+//return strings length
 
     // YOUR CODE ABOVE HERE //
 }
@@ -26,8 +26,8 @@ function length(string) {
 function toLowerCase(string) {
     // YOUR CODE BELOW HERE //
 
-
-
+return string.toLowerCase();
+//forcing string to lowercase
     // YOUR CODE ABOVE HERE //
 }
 
@@ -37,8 +37,8 @@ function toLowerCase(string) {
 function toUpperCase(string) {
     // YOUR CODE BELOW HERE //
 
-
-
+return string.toUpperCase();
+//forcing strin to uppercase
     // YOUR CODE ABOVE HERE //
 }
 
@@ -57,8 +57,8 @@ function toUpperCase(string) {
  */
 function toDashCase(string) {
     // YOUR CODE BELOW HERE //
-
-
+//forcing string to lowercase then replacing all spaces with - 
+return string.toLowerCase().replaceAll(" ", "-");
 
     // YOUR CODE ABOVE HERE //
 }
@@ -77,9 +77,12 @@ function toDashCase(string) {
  */
 function beginsWith(string, char) {
     // YOUR CODE BELOW HERE //
-
-    
-
+    //forcing string & char to lowercase to make comparable
+if (string.toLowerCase().charAt(0) === char.toLowerCase()){ //comparing character at index 0 to char
+    return true; //return true
+} else {
+    return false; //if not false
+}
     // YOUR CODE ABOVE HERE //
 }
 
@@ -97,9 +100,12 @@ function beginsWith(string, char) {
  */
 function endsWith(string, char) {
     // YOUR CODE BELOW HERE //
-
-
-
+    //forcing string & char to lowercase to make comparable
+if (string.toLowerCase().charAt(string.length - 1) === char.toLowerCase()){ //comparing the char at the end of string by using length - 1 to get the last index
+    return true; //return true
+} else {
+    return false; //else false
+}
     // YOUR CODE ABOVE HERE //
 }
 
@@ -110,8 +116,8 @@ function endsWith(string, char) {
  */
 function concat(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-
-
+//conacting stringOne & stringTwo
+return stringOne.concat(stringTwo);
 
     // YOUR CODE ABOVE HERE //
 }

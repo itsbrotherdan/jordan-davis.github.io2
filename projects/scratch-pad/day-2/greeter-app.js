@@ -33,12 +33,18 @@
  *      the exact case.
  */
 
-function greeter(hour) {
+ function greeter(hour) {
     // YOUR CODE BELOW HERE //
-    
-    
-    
-    
+
+      if (hour >= 0 && hour <= 11){ //checking if hour is between 0 and 11 log Good Morning!
+        console.log('Good Morning!');
+    } else if (hour >= 12 && hour <= 16){ //checking if hour is between 12 and 16 log Good Afternoon
+        console.log('Good Afternoon!');
+    } else if (hour >= 17 && hour <= 21){  //checking if hour is between 17 and 21 log Good Evening!
+        console.log('Good Evening!');
+    } else if (hour >= 22 && hour <= 24){ //checking if hour is between 22 and 24 log Good Night!
+        console.log('Good Night!');
+    }
     // YOUR CODE ABOVE HERE //
 }
 
