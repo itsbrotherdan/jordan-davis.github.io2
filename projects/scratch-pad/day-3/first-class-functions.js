@@ -13,7 +13,9 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+   return function(value){
+    return value > base;
+   }
     
     
     
@@ -28,7 +30,9 @@ function createGreaterThanFilter(base) {
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
     
-    
+    return function(value){
+        return value < base;
+       }
     
     
     // YOUR CODE ABOVE HERE //
@@ -41,7 +45,9 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    
+    return function(string){
+        
+    }
     
     
     
