@@ -40,7 +40,7 @@ function isObject(value) {
     return false;
   } else if (typeof value === 'boolean') {
     return false;
-  } else if (typeof value === 'object') {
+  } else {
     return true;
   }
     // YOUR CODE ABOVE HERE //
@@ -66,7 +66,7 @@ function isCollection(value) {
         return false;
     } else if (typeof value === 'boolean') {
         return false;
-    } else if (typeof value === 'object') {
+    } else {
         return true;
     }
     // YOUR CODE ABOVE HERE //
