@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 function objectValues(object) {
-
+return Object.values(object); //returning values of object
 } 
 
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@ function objectValues(object) {
 //////////////////////////////////////////////////////////////////////
 
 function keysToString(object) {
-
+return Object.keys(object).join(" "); //turning objects keys into strings
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -19,7 +19,13 @@ function keysToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function valuesToString(object) {
-    
+    var arr = []; //create an empty array to store our values
+    for (key in object){ //looping through object keys
+     if (typeof object[key] === 'string'){ //if typeof object[key] is a string 
+        arr.push(object[key]) //push object[key] to the array
+      }
+    }
+    return arr.join(' '); //join values into strings
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -27,15 +33,19 @@ function valuesToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function arrayOrObject(collection) {
-    
+    if (Array.isArray(collection)){ //if collection is an array return array
+        return 'array';
+    } else { //otherwise return object
+        return 'object';
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 5 - Capitalize Word //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function capitalizeWord(string) {
-    
+function capitalizeWord(string) { //returning the first letter of string to uppercase + returning a shallow copy of string
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -43,7 +53,7 @@ function capitalizeWord(string) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeAllWords(string) {
-    
+    return string.replace(/(^\w|\s\w)/g, m => m.toUpperCase()); //using regEX to return the first letter of our string capitalized
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -51,7 +61,8 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-
+    return 'Welcome ' + capitalizeWord(object.name) + "!" //concat welcome and ! and capitalizing object.name
+    // return 'Welcome ' + capitalizeWord.(object.name) + "!";
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -59,7 +70,10 @@ function welcomeMessage(object) {
 //////////////////////////////////////////////////////////////////////
 
 function profileInfo(object) {
-
+       return object.name.charAt(0).toUpperCase() + object.name.slice(1) + " " + 'is a' + " " + object.species.charAt(0).toUpperCase() + object.species.slice(1);
+    // return object.name.charAt(0).toUpperCase() + object.name.slice(1) + " " + 'is a' + " " + object.species.charAt(0).toUpperCase() + object.species.slicel(1);
+// return object.name.charAt(0).toUpperCase() + object.name.slice(1) + ' is a ' + object.species.charAt(0).toUppercase() + object.species.slice(1);
+//im not sure why it wasnt working before but yeah lol
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -67,15 +81,38 @@ function profileInfo(object) {
 //////////////////////////////////////////////////////////////////////
 
 function maybeNoises(object) {
-
+    //checking if object has noises prop
+    if (object.hasOwnProperty('noises')){ 
+        //checking if noises prop length is not 0 
+        if (object.noises.length !== 0){
+            //return the values joined into strings
+            return object.noises.join(' ');
+        } else {
+            return 'there are no noises'
+        }
+    }
+// for (keys in object){
+//     if(keys === 'noises'){
+//      object.noises.join('')
+//      if (noises === ''){
+//     return 'there are no noises'
+//      }
+//     } else {
+//         return 'there are no noises'
+//     }
+// } 
+return 'there are no noises'
 }
-
 //////////////////////////////////////////////////////////////////////
 // Function 10 - Has Words ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
-
+if (string.includes(word)){ //checking if string has word
+    return true //if so then return true
+} else {
+    return false //else return false
+}
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -83,7 +120,9 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+    //pushing name to friends object
+object.friends.push(name);
+return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -91,7 +130,24 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
-
+    if (object.hasOwnProperty('friends')){
+        if (object.friends.includes(name)){
+            return true
+        } else {
+            return false
+        }
+    }
+    // if (Object.values(object).indexOf('name') > - 1){
+    //     return true
+    // } else {
+    //     return false
+    // }
+// if (Object.values(object).includes(name)){
+//     return true
+// } else {
+//     return false
+// }
+return false
 }
 
 //////////////////////////////////////////////////////////////////////
