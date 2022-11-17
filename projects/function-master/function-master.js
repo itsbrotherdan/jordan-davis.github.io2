@@ -157,12 +157,13 @@ return false
 function nonFriends(name, array) {
 var nonFriends = []; //create empty array
 for(var i = 0; i < array.length; i ++){ //iterate over array
- if(name !== array[i].name && array[i].friends.indexOf(name)){ //check if name is not in array && not in friends array
+ if(name !== array[i].name && array[i].friends.indexOf(name)){ //check if name exist & returning indexOf name
         nonFriends.push(array[i].name); //push names that arent in friends array
     }
 }
 return nonFriends; //return new array
 }
+
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
