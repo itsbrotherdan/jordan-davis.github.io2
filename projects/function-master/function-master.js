@@ -155,15 +155,21 @@ return false
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-
+var nonFriends = []; //create empty array
+for(var i = 0; i < array.length; i ++){ //iterate over array
+ if(name !== array[i].name && array[i].friends.indexOf(name)){ //check if name is not in array && not in friends array
+        nonFriends.push(array[i].name); //push names that arent in friends array
+    }
 }
-
+return nonFriends; //return new array
+}
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+object[key] = value; //adding key value pair
+return object; //returning object
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -171,7 +177,9 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+for (var i = 0; i < array.length; i++){ //iterating over the array
+    delete object[array[i]]; //deleting property from object
+}
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -179,7 +187,13 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+array.sort(); //sorting the array in order 
+for (var i = array.length; i--;){ //looping in reverse 
+if (array[i] === array[i - 1]){ //if array[i] === the same value - 1
+   array.splice(i, 1); //remove value from array
+}
+}
+return array //return array with removed values
 }
 
 //////////////////////////////////////////////////////////////////////
