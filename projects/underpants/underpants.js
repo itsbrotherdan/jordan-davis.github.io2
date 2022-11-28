@@ -20,7 +20,7 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-_.identify = function(value){
+_.identity = function(value){
 //returning value unchanged
     return value;
 }
@@ -71,7 +71,7 @@ _.typeOf = function(value){
 *   1) An array
 *   2) A number
 * Objectives:
-*   1) If <array> is not an array, return []
+*   1) If <array> is not an array, return [] 
 *   2) If <number> is not given or not a number, return just the first element in <array>.
 *   3) Otherwise, return the first <number> items of <array>
 * Edge Cases:
@@ -84,7 +84,25 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 _.first = function(array, num){
-    
+    let a = []; //store our values in empty array
+    //if array is not an array 
+    if (!Array.isArray(array)){
+        //return an empty array
+        return a;
+        //else if num is not given, or a number 
+    } else if (typeof num != 'number'){
+        //return first value in the array
+        return array[0];
+        //if num is greater than the array length
+    } else if (num > array.length){
+        //return array
+        return array;
+    } else {
+     for (var i = 0; i < num; i ++){
+        a.push(array[i]);
+     }
+    }
+    return a;
 }
 
 /** _.last
@@ -104,7 +122,31 @@ _.first = function(array, num){
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
-
+_.last = function(array, num){
+//store our values in empty array
+let b = [];
+//if array is not an array
+if (!Array.isArray(array)){
+    //return an empty array
+    return b;
+    //else if num is not given, or a nunber
+} else if (typeof num != 'number'){
+    //return last element in array
+    return array[2];
+    //else if num is greater than array.length
+} else if (num > array.length){
+//return array
+return array;
+//checking if num is negative
+} else if (num < 0){
+    return b
+} else { //iterating overarray pushing values into our new array
+for (let i = num - 1; i < array.length; i ++){
+    b.push(array[i]);
+}
+}
+return b
+}
 
 /** _.indexOf
 * Arguments:
@@ -121,7 +163,18 @@ _.first = function(array, num){
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function (array, value){
+    //iterate through array 
+for (let i = 0; i < array.length; i++){
+    //check if value in array is === to value 
+    if (array[i] === value){
+        //return the index
+        return i;
+    } 
+}
+//if value is not in array return -1
+return -1 
+}
 
 /** _.contains
 * Arguments:
@@ -137,7 +190,9 @@ _.first = function(array, num){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+_.containts = function(array, value){
 
+}
 
 /** _.each
 * Arguments:
@@ -195,7 +250,20 @@ _.each = function (collection, func){
 * Extra Credit:
 *   use _.each in your implementation
 */
-
+_.filter = function(array, func){
+    //create an empty array
+    let output = [];
+    //iterate over array
+    for (let i = 0; i < array.length; i ++){
+        //create callback func
+        if(func(array[i], i, array)){
+            //push filtered values into new array if true
+            output.push(array[i]);
+        }
+    }
+    //return new array
+    return output;
+}
 
 /** _.reject
 * Arguments:
@@ -209,7 +277,20 @@ _.each = function (collection, func){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-
+_.reject = function(array, func){
+    //create empty array 
+    let output = [];
+    //iterate over the array
+    for (let i = 0; i < array.length; i++){
+        //create callback func
+        if(!func(array[i], i, array)){
+            //push filtered values into new array if false
+            output.push(array[i]);
+        }
+    }
+    //retrun new array
+    return output;
+}
 
 /** _.partition
 * Arguments:
