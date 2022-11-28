@@ -20,7 +20,10 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-
+_.identify = function(value){
+//returning value unchanged
+    return value;
+}
 
 /** _.typeOf
 * Arguments:
@@ -41,7 +44,27 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
+_.typeOf = function(value){ 
+    if (Array.isArray(value)){
+        return 'array'; //checking if array
+    }  else if(typeof value === 'string') {
+        return 'string'; //checking if string
+    } else if (value === null){
+      return 'null'; //checking if null
+    } else if (typeof value === 'number'){
+      return 'number'; //checking if number
+    } else if (value instanceof Date ){
+      return 'date'; //checking if date
+    } else if (typeof value === 'function'){
+      return 'function'; //checking if function
+    } else if (typeof value === 'boolean'){
+        return 'boolean'; //checking if boolean
+    } else if (typeof value === 'undefined'){
+        return 'undefined'; //checking if undefined
+    } else if (typeof value === 'object'){
+        return 'object'; //checking if object
+    } 
+};
 
 /** _.first
 * Arguments:
@@ -60,7 +83,9 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
-
+_.first = function(array, num){
+    
+}
 
 /** _.last
 * Arguments:
@@ -129,8 +154,21 @@ var _ = {};
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
-
-
+_.each = function (collection, func){
+    //determine if collection is an array
+    if(Array.isArray(collection)){
+     //iterate through collection
+     for (let i = 0; i < collection.length; i ++){
+        func(collection[i], i, collection);
+     }
+    } //else collection is an object
+    else { 
+      //iterate through collection
+      for (let key in collection){ //access to each key in object
+       func(collection[key], key, collection);
+      }
+    }
+}
 /** _.unique
 * Arguments:
 *   1) An array
