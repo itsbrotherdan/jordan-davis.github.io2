@@ -190,7 +190,7 @@ return -1
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-_.containts = function(array, value){
+_.contains = function(array, value){
 
 }
 
@@ -324,7 +324,7 @@ _.reject = function(array, func){
 *            the value, it's key, <collection>
 *   2) save the return value of each <function> call in a new array
 *   3) return the new array
-* Examples:
+* Examples: 
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
