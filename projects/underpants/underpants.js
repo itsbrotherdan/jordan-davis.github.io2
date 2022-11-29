@@ -191,7 +191,12 @@ return -1
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 _.contains = function(array, value){
-
+ for (var i = 0; i < array.length; i ++){
+    if (array[i] === value){
+        return true;
+    }
+ }
+ return false;
 }
 
 /** _.each
@@ -233,7 +238,19 @@ _.each = function (collection, func){
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
+_.unique = function (array){
+    //creating empty array
+var newArr = [];
+//looping over array
+for (var i = 0; i < array.length; i++){
+    if (_.indexOf(newArr, array[i]) === -1){
+        //pushing new values into empty array
+        newArr.push(array[i]);
+    }
+} 
+//return new array
+return newArr;
+}
 
 /** _.filter
 * Arguments:
@@ -310,7 +327,21 @@ _.reject = function(array, func){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-
+// _.partition = function(array, func){
+//    var newArr = [];
+//    var arr = [];
+//    var arrr = [];
+//     for (let i = 0; i < array.length; i ++){
+//         if (func(array[i], i, array)){
+//             newArr.push(array[i]);
+//         }
+//     } for (let i = 0; i < array.length; i ++){
+//         if (!func(array[i], i, array)){
+//             arr.push(array[i]);
+//         }
+//    return arrr.push(arr, newArr);
+//     }
+// }
 
 /** _.map
 * Arguments:
@@ -327,7 +358,24 @@ _.reject = function(array, func){
 * Examples: 
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = function (collection, func){
+    //create empty array for holding
+    var arr = [];
+    //if collection is an array - loop then - push call back func
+    if (Array.isArray(collection)){
+        //loop over possible array
+        for (let i = 0; i < collection.length; i ++){
+            arr.push(func(collection[i], i, collection));
+        } 
+    } else { //else if collection is an array - loop then - push call back func
+        //loop over possible object
+        for (let key in collection){
+            arr.push(func(collection[key], key, collection));
+        }
+    }
+    //return new array
+    return arr;
+}
 
 /** _.pluck
 * Arguments:
@@ -361,8 +409,52 @@ _.reject = function(array, func){
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-
-
+_.every = function(collection, func){
+    if(func === undefined ){
+        //determine if collection is an array
+        if(Array.isArray(collection)){
+            //iterate through collections array
+            for(let i = 0; i < collection.length; i++){
+                //determine if collection[i] is truthy
+                if(!collection[i]){
+                    //return false;
+                    return false;
+                }
+            }
+        } else { //else
+            //iterate through object
+            for(let key in collection){
+                //determine if collection[key] is truthy
+                if(!collection[key]){
+                    //return false;
+                    return false;
+                }
+            }
+        }
+    } else{ //else
+        //determine if collection is an array
+        if(Array.isArray(collection)){
+            //iterate through collections array
+            for(let i = 0; i < collection.length; i++){
+                //determine if invoking func on the params is false
+                if(func(collection[i], i, collection) === false){
+                    //return false
+                    return false;
+                }
+            }
+        } else{ //else its an object
+            //iterate through object
+            for(let key in collection){
+                //determine if invoking func on the params is false
+                if(func(collection[key], key, collection) === false)
+                {   //return false;
+                    return false;
+                }
+            }
+        }
+    }//return true
+    return true;
+     }
 /** _.some
 * Arguments:
 *   1) A collection
@@ -403,8 +495,28 @@ _.reject = function(array, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-
-
+_.reduce = function(array, func, seed){
+    //create result variable
+    let result;
+    //determine if seed value was not given a value
+    if (seed === undefined){
+      //assign result to first value of array  
+      result = array[0];
+      // iterate through input array
+      for (let i = 1; i < array.length; i++){
+        result = func(result, array[i], i, array)
+      }
+    
+    } else {
+        //assign result the value of seed
+        result = seed;
+        //iterate normally
+        for (let i = 0; i < array.length; i++) {
+            result = func(result, array[i], i, array)
+        }
+    }
+    return result;
+}
 /** _.extend
 * Arguments:
 *   1) An Object
