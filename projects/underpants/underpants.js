@@ -65,7 +65,6 @@ _.typeOf = function(value){
         return 'object'; //checking if object
     } 
 };
-
 /** _.first
 * Arguments:
 *   1) An array
@@ -104,7 +103,6 @@ _.first = function(array, num){
     }
     return a;
 }
-
 /** _.last
 * Arguments:
 *   1) An array
@@ -147,7 +145,6 @@ for (let i = num - 1; i < array.length; i ++){
 }
 return b
 }
-
 /** _.indexOf
 * Arguments:
 *   1) An array
@@ -175,7 +172,6 @@ for (let i = 0; i < array.length; i++){
 //if value is not in array return -1
 return -1 
 }
-
 /** _.contains
 * Arguments:
 *   1) An array
@@ -198,7 +194,6 @@ _.contains = function(array, value){
  }
  return false;
 }
-
 /** _.each
 * Arguments:
 *   1) A collection
@@ -327,22 +322,23 @@ _.reject = function(array, func){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-// _.partition = function(array, func){
-//    var newArr = [];
-//    var arr = [];
-//    var arrr = [];
-//     for (let i = 0; i < array.length; i ++){
-//         if (func(array[i], i, array)){
-//             newArr.push(array[i]);
-//         }
-//     } for (let i = 0; i < array.length; i ++){
-//         if (!func(array[i], i, array)){
-//             arr.push(array[i]);
-//         }
-//    return arrr.push(arr, newArr);
-//     }
-// }
-
+_.partition = function(array, func){
+   var truthy = []; //creating new array
+   var falsy = [];  //creating new array
+   var combined = [truthy, falsy]; //creating new array of combined arrays 
+   //looping over array
+    for (let i = 0; i < array.length; i ++){
+        //if elements are truth push them into truthy array
+        if (func(array[i], i, array)){
+            truthy.push(array[i]);
+        } else {
+            //else push them into falsy array
+            falsy.push(array[i]);
+        }
+    } 
+    //return new combined array
+    return combined;
+}
 /** _.map
 * Arguments:
 *   1) A collection
@@ -376,7 +372,6 @@ _.map = function (collection, func){
     //return new array
     return arr;
 }
-
 /** _.pluck
 * Arguments:
 *   1) An array of objects
@@ -387,8 +382,15 @@ _.map = function (collection, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
-
+_.pluck = function (array, property){
+    //mapping over pluck
+var plucked = _.map(array, function(item){
+    //returning value for property for every in array
+    return item[property]
+  })
+  //return new array
+  return plucked
+}
 /** _.every
 * Arguments:
 *   1) A collection
@@ -475,8 +477,52 @@ _.every = function(collection, func){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
-
+_.some = function(collection, func){
+    if(func === undefined ){
+        //determine if collection is an array
+        if(Array.isArray(collection)){
+            //iterate through collections array
+            for(let i = 0; i < collection.length; i++){
+                //determine if collection[i] is falsy
+                if(collection[i]){
+                    //return true;
+                    return true;
+                }
+            }
+        } else { //else
+            //iterate through object
+            for(let key in collection){
+                //determine if collection[key] is falsy
+                if(collection[key]){
+                    //return true;
+                    return true;
+                }
+            }
+        }
+    } else{ //else
+        //determine if collection is an array
+        if(Array.isArray(collection)){
+            //iterate through collections array
+            for(let i = 0; i < collection.length; i++){
+                //determine if invoking func on the params is true
+                if(func(collection[i], i, collection) === true){
+                    //return true
+                    return true;
+                }
+            }
+        } else{ //else its an object
+            //iterate through object
+            for(let key in collection){
+                //determine if invoking func on the params is true
+                if(func(collection[key], key, collection) === true)
+                {   //return true;
+                    return true;
+                }
+            }
+        }
+    }//return false
+    return false;
+     }
 /** _.reduce
 * Arguments:
 *   1) An array
@@ -501,17 +547,19 @@ _.reduce = function(array, func, seed){
     //determine if seed value was not given a value
     if (seed === undefined){
       //assign result to first value of array  
-      result = array[0];
+      result = array[0]; //seed defaults to first value in the array if not defined
       // iterate through input array
       for (let i = 1; i < array.length; i++){
-        result = func(result, array[i], i, array)
+        //took 0 index and assigned it to result already so start iterating at 1
+        result = func(result, array[i], i, array) //constantly reassinging result to the callback 
       }
     
     } else {
         //assign result the value of seed
         result = seed;
         //iterate normally
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < array.length; i++) { 
+            //start iterating at 0 because seed has been set 
             result = func(result, array[i], i, array)
         }
     }
@@ -531,7 +579,12 @@ _.reduce = function(array, func, seed){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
+_.extend = function (object1, object2, ...object){
+    //assigning object2 & ...object to object 1
+Object.assign(object1, object2, ...object);
+//returning object
+return object1;
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
