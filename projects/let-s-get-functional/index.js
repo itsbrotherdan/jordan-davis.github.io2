@@ -119,7 +119,7 @@ var friendFirstLetterCount = function(array, customer, letter) {
     }
 };
 var friendsCount = function(array, name){
-    //create an empty array
+    //create an empty array 
     var arr = [];
     //create nested for loop
     for (let i = 0; i < array.length; i++){
