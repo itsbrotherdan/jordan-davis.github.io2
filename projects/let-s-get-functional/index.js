@@ -3,7 +3,7 @@
 'use strict';
 
 var customers = require('./data/customers.json');
-var _ = require(/* Replace this with the name of your lodown! */);
+var _ = require('underbar');
 
 /**
  * 1. Import your lodown module using the require() method,
@@ -16,32 +16,137 @@ var _ = require(/* Replace this with the name of your lodown! */);
  *
  * 4. To test your work, run the following command in your terminal:
  *
- *    npm start --prefix ./<YOUR_GITHUB_FOLDER/projects/let-s-get-functional
+ *    npm start --prefix ./jordan-davis.github.io2/projects/let-s-get-functional
  *
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
+//filter = searching through customers array 
 
 var maleCount = function(array) {
-
+    //use filter to return a new area of all customers who are male
+let males = _.filter(array, function(customer){
+    //if gender === male return true
+if (customer.gender === 'male'){
+   return true;
+   //otherwise return false
+} else { 
+    return false;
+}
+});
+//return males.length for count
+return males.length;
 };
 
-var femaleCount;
+var femaleCount = function(array){
+    let females = _.reduce(array, function(acc, curr){
+        //determine if current item in the array is female
+       if (curr.gender === 'female'){
+          return acc + 1;
+       } 
+          return acc;
+    }, 0)
+          return females; //females => number of females
+};
 
-var oldestCustomer;
+var oldestCustomer = function(array){
+    let oldest = _.reduce(array, function(acc, curr){
+        //checking if the accumalator is greater than the current
+if (acc.age > curr.age){
+    //return accumalator
+   return acc;
+} else {
+    //otherwise return current
+    return curr;
+}
+    });
+    //return the name of the oldest
+    return oldest.name;
+};
 
-var youngestCustomer;
+var youngestCustomer = function(array){
+    let youngest = _.reduce(array, function(acc, curr){
+        //checking if the accumalator is less than the current
+if (acc.age < curr.age){
+     //return accumalator
+   return acc;
+} else {
+    //otherwise return current
+    return curr;
+}
+    });
+    //return the name of the youngest
+    return youngest.name;
+};
 
-var averageBalance;
+var averageBalance = function(array){
+    let average = _.reduce(array, function(acc, curr){
+        //creating variable to hold balance string with replaced digits & turning it into a number
+        let currNumb = Number(curr.balance.replace(/[$,]+/g,"")); //can combine Number & replace method to 1 line
+    // let currString = curr.balance.replace(/[$,]+/g,"");
+    // let currNumber = Number(currString);
+    //counting 
+    return acc += currNumb;
+    }, 0)
+    //returning average balance of customers
+    return average / array.length;
+}
 
-var firstLetterCount;
+var firstLetterCount = function(array, letter){
+ var letters = _.filter(array, function(customers){
+    //bringing the first letter in name to lowercase to strictly equal letter as lowercase
+    return customers.name[0].toLowerCase() === letter.toLowerCase()
+ })
+ //return the length of letters
+ return letters.length
+}
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, customer, letter) {
+    let letters = _.filter(array, function(customer) {
+        for (let i = 0; i < customer.friends.length; i++) {
+            if (customer.friends[i].name[0].toLowerCase() === letter.toLowerCase()) {
+                return true
+            }
+        }
+    })
+    return letters.length;
+};
 
-var friendsCount;
+var friendsCount = function(array, name){
+    //create an empty array
+    var arr = [];
+    //create nested for loop
+    for (let i = 0; i < array.length; i++){
+    //loop the item in array
+    for (let a = 0; a < array[i].friends.length; a++){
+        //check if value name is a friend
+        if (array[i].friends[a].name === name){
+            //push values to empty array
+            arr.push(array[i].name);
+         }
+       }
+     }
+    return arr;
+    }  //= function(array){
+//     let friends = _.filter(array, function(customers){
+
+//     })
+// }
 
 var topThreeTags;
 
-var genderCount;
+var genderCount = function(array){
+    let genders = _.reduce(array, function(acc, curr){
+        //if acc
+        if (acc[curr.gender]){
+            acc[curr.gender] += 1
+        } else {
+            acc[curr.gender] = 1
+        }
+        return acc;
+    }, {});
+    //return list of genders
+    return genders;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
