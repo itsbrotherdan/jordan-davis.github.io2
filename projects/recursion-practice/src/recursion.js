@@ -76,6 +76,12 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  //base
+  // if (){
+
+  // }
+  //recursion
+
 };
 
 // 8. Determine if a number is a power of two.
@@ -121,7 +127,18 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
-};
+  if (y === 0){
+    return 0
+  } 
+  else if (y === 1){
+    return x
+  }
+  if (y > 0){
+    return x + multiply(x, y - 1)}
+  else{
+    return -x + multiply(x, y + 1)
+  };
+  }
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
@@ -142,15 +159,38 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  //base
+  if (str1.length === 0 && str2.length === 0){
+    return true;
+  }
+  //recursion
+  if (str1[0] === str2[0]){
+    return compareStr(str1.slice(1), str2.slice(1));
+  } else {
+    return false;
+  }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, output=[]){
+  //base
+  if (str.length === 0){
+    return output;
+  }
+  output.push(str[0]);
+  //recursion
+  return createArray(str.slice(1), output)
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, output=[]) {
+  //base
+  if (array.length === 0){
+    return output
+  }
+  output.unshift(array[0])
+  return reverseArr(array.slice(1), output)
 };
 
 // 18. Create a new array with a given value and length.
