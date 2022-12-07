@@ -67,23 +67,40 @@ var sumBelow = function(n) {
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
-};
+var range = function(x, y, output=[]) {
+  // base 
+  if (x === y - 1) {
+    return output;
+  } else if (y === x - 1) {
+    return output;
+  }else if (x === y) {
+    return output;
+  }
+  // recursion
+  if (x < y) {
+    output.push(x + 1);
+    return range(x + 1, y, output);
 
+  } else if (x > y) {
+    output.push(x - 1);
+    return range(x - 1, y, output);
+  }
+};
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
-  //base
-  // if (){
-
-  // }
-  //recursion
-
-};
-
+  if (exp < 0){
+    return exponent(base, exp + 1) / base;
+  }
+  if (exp === 0){
+    return 1
+  } else {
+    return base * exponent(base, exp - 1);
+  }
+  };
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
@@ -112,8 +129,20 @@ var reverse = function(string) {
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) { 
+var palindrome = function(string) {
+  // creating new string to convert to lowercase and ignore spaces
+  newStr = string.toLowerCase().replace(" ", "")
+  // base 
+  if (newStr.length < 2) {
+    return true;
+  }
+  // recursion
+  if (newStr[0] === newStr[newStr.length - 1]) {
+    return palindrome(newStr.slice(1, newStr.length - 1));
+  }
+  return false;
 };
+
 
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
@@ -189,6 +218,7 @@ var reverseArr = function (array, output=[]) {
   if (array.length === 0){
     return output
   }
+  //recursion 
   output.unshift(array[0])
   return reverseArr(array.slice(1), output)
 };
@@ -196,7 +226,15 @@ var reverseArr = function (array, output=[]) {
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-var buildList = function(value, length) {
+var buildList = function(value, length, output=[]) {
+  //base
+  if (length === 0){
+    return output;
+  } 
+  //recursion
+output.push(value);
+length --
+return buildList(value, length, output);
 };
 
 // 19. Count the occurence of a value inside a list.
@@ -248,12 +286,27 @@ var nthFibo = function(n) {
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function(input) {
+var capitalizeWords = function(input, output=[]) {
+  //base
+  if (input.length === 0){
+      return output
+  }
+  //recursion
+  output.push(input[0].toUpperCase());
+  return capitalizeWords(input.slice(1), output);
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function(array) {
+var capitalizeFirst = function(array, output=[]) {
+  // //base
+  // if (array.length === 0){
+  //   return output
+  // }
+  // //recursion
+  // let char = array.split(" ");
+  // output.push(array.charAt(0).toUpperCase())
+  // return capitalizeFirst(array.slice(1), output);
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -295,7 +348,17 @@ var augmentElements = function(array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function(array) {
+var minimizeZeroes = function(array, output=[]) {
+  //base
+  if (array.length === 0){
+return output;
+  }
+  //recursion
+if (array[0] === 0 && array[1] === 0){ 
+  return minimizeZeroes(array.slice(1), output);
+}
+output.push(array[0]);
+return minimizeZeroes(array.slice(1), output);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
