@@ -240,12 +240,29 @@ return buildList(value, length, output);
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
+var countOccurrence = function(array, value, output=0) {
+  //base
+if (array.length === 0){
+  return output;
+}
+//recursion
+if(array[0] === value){
+  output += 1
+}
+return countOccurrence(array.slice(1), value, output);
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
-var rMap = function(array, callback) {
+var rMap = function(array, callback, output=[]) {
+  //base
+  if (array.length === 0){ //if array length hits 0 return output
+   return output;
+  }
+  //recursion
+  var output = rMap(array.slice(1, array.length), callback);
+  output.unshift(callback(array[0])); //slicing the array so it can equal 0 and unshift it to our new array
+   return output;
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -281,6 +298,18 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  //base
+  if(n === -1){
+    return null
+  } 
+  if(n === 1){
+    return 1
+  }
+  if(n === 0){
+    return 0
+  }
+  //recursion
+  return nthFibo(n -1) + nthFibo(n - 2);  
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -299,14 +328,14 @@ var capitalizeWords = function(input, output=[]) {
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function(array, output=[]) {
-  // //base
-  // if (array.length === 0){
-  //   return output
-  // }
-  // //recursion
-  // let char = array.split(" ");
-  // output.push(array.charAt(0).toUpperCase())
-  // return capitalizeFirst(array.slice(1), output);
+  //base
+  if (array.length === 0){
+    return output
+  }
+  //recursion
+  output.push(array[0].charAt(0).toUpperCase() + array[0].substring(1));
+
+  return capitalizeFirst(array.slice(1), output);
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -328,9 +357,21 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
-};
+var letterTally = function(str, obj={}) {
+  // base case if string.length equals zero return object
+  if(str.length === 0){
+    return obj;
 
+  } 
+if (obj[str[0]]){ // object includes the key of the index of string value increments 
+  obj[str[0]] += 1
+} else { // if object doesnt include the key of index of string set it equal to 1
+  obj[str[0]] = 1; 
+}
+
+// call letterTally until str length equals zero
+ return letterTally(str.slice(1), obj)
+};
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
 // elements they should be replaced with a single copy of the element. The order of the
 // elements should not be changed.
@@ -372,8 +413,33 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  if (str.length === 0) return '';
+  var temp = numToText(str.substring(0, str.length - 1));
+  var replace; 
+  switch (str[str.length-1]) {
+    case '1': replace = 'one';
+      break;
+    case '2': replace = 'two';
+      break;
+    case '3': replace = 'three';
+      break;
+    case '4': replace = 'four';
+      break;
+    case '5': replace = 'five';
+      break;
+    case '6': replace = 'six';
+      break;
+    case '7': replace = 'seven';
+      break;
+    case '8': replace = 'eight';
+      break;
+    case '9': replace = 'nine';
+      break;
+    default: replace = str[str.length - 1];
+      break;
+  }
+  return temp + replace;
 };
-
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
