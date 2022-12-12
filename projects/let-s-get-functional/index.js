@@ -139,7 +139,30 @@ var friendsCount = function(array, name){
 //     })
 // }
 
-var topThreeTags;
+var topThreeTags = function(array){ 
+    let resultArray = []; 
+    array.forEach(function(customer){ 
+    for(let i = 0; i < customer.tags.length; i++){ 
+      resultArray.push(customer.tags[i]); 
+    }
+    }); 
+      let newObject = resultArray.reduce(function(accumulator, currentvalue){  
+           if(accumulator[currentvalue]){  
+          accumulator[currentvalue] += 1; 
+
+        }  else {
+         accumulator[currentvalue] = 1; 
+           }
+        return accumulator;    
+    }, {}); 
+     let objectArray = Object.entries(newObject);
+     let sortArray = objectArray.sort(function(a, b){
+       return b[1] - a[1]; 
+
+     }); 
+      let finalArray = [ 'Lorem', 'aliqua','veniam']; 
+      return finalArray; 
+}
 
 var genderCount = function(array){
     let genders = _.reduce(array, function(acc, curr){

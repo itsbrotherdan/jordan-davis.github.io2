@@ -299,7 +299,7 @@ var fibonacci = function(n) {
 // nthFibo(3); // 2
 var nthFibo = function(n) {
   //base
-  if(n === -1){
+  if(n < 0){
     return null
   } 
   if(n === 1){
@@ -377,7 +377,20 @@ if (obj[str[0]]){ // object includes the key of the index of string value increm
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function(list) {
+var compress = function(list, output=[]) {
+  //base
+  if (list.length === 0){
+return output
+  }
+  //recurison
+  //create compressed variable thats slicing the current list
+var compressed = compress(list.slice(1));
+//if value is not equal to the sliced value
+if (list[0] !== compressed[0]){
+  //unshift values to compressed 
+compressed.unshift(list[0]);
+}
+return compressed;
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -406,8 +419,24 @@ return minimizeZeroes(array.slice(1), output);
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(array) {
-};
+var alternateSign = function(array, output=[])  {
+  //base
+  if(array.length === 0){
+  return output;
+  }
+  if(array[0] < 0 ){
+  output.push(array[0] * -1);
+  }else{
+    output.push(array[0]);
+  }
+  //recursion
+  if(array[1] > 0 ){
+  output.push(array[1] * -1);
+    }else{
+      output.push(array[1]);
+    }
+  return alternateSign(array.slice(2), output);
+  };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
