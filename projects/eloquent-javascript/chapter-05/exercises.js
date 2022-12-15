@@ -6,10 +6,9 @@ function flatten(arr){
   var list = [];
   //loop over arr
   for (let i = 0; i < arr.length; i++){
-    
-    //loop again
+    //loop over values of arr
   for (let a = 0; a < arr[i].length; a++){
-    //push to arr
+    //push values to list
       list.push(arr[i][a]);
     }
   }
@@ -32,7 +31,7 @@ function loop(start, test, update, value) {
 // /////////////////////////////////////////////////////////////////////////////
 
 function every(arr, test) {
-  //create var for true
+  //create a true variable
   var isTrue = true;
   //loop throuh arr
   for (let i = 0; i < arr.length; i ++){
@@ -48,10 +47,27 @@ function every(arr, test) {
 // dominantDirection ///////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function dominantDirection() {
-
-}
-
+function dominantDirection(str) {
+  //create two arrays to store occurencer of ltr rtl
+  let ltr = [];
+  let rtl = [];
+  //iterate through the input string
+  for(let i = 0; i < str.length; i++){
+    let script = characterScript(str.charCodeAt(i));
+    if(script !== null){
+    if(script.direction === 'ltr'){
+      ltr.push(script);
+    }
+    else {
+      rtl.push(script);
+    }
+  }
+    } if (ltr.length > rtl.length){
+    return 'ltr';
+    } else {
+    return 'rtl';
+  }
+  }
 // /////////////////////////////////////////////////////////////////////////////
 //  //////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
